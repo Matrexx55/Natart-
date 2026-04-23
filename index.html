@@ -1,438 +1,553 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NATART - Modern Art</title>
-<!-- Google Fonts for a modern look -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet" />
-<style>
-  /* Reset & base styles */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    font-family: 'Roboto', sans-serif;
-    /* Rose background with texture using CSS gradient overlay */
-    background-color: #ffe4e1; /* Light rose base color */
-    background-image: 
-      radial-gradient(circle, rgba(255, 215, 0, 0.05) 1px, transparent 1px),
-      radial-gradient(circle, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
-    background-position: 0 0, 10px 10px;
-    background-size: 20px 20px;
-    color: #333; /* Dark text for contrast */
-    line-height: 1.6;
-  }
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  /* Container */
-  .container {
-    width: 90%;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NATART – ხელოვნება თაბაშირით</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS Variables ===== */
+    :root {
+      --bg: #FFF5F5;
+      --bg-header: #FFE8E8;
+      --gold: #8B6508;
+      --gold-light: #C49A1A;
+      --text-dark: #4A4A4A;
+      --text-heading: #8B6508;
+      --white: #ffffff;
+      --shadow: 0 4px 24px rgba(139,101,8,0.08);
+      --radius: 14px;
+    }
 
-  /* Header */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  .logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.8em;
-    color: #b8860b; /* Dark Gold */
-    letter-spacing: 2px;
-  }
-  nav {
-    display: flex;
-    gap: 30px;
-  }
-  nav a {
-    font-weight: 600;
-    font-size: 1em;
-    color: #555;
-    transition: color 0.3s, transform 0.3s;
-  }
-  nav a:hover {
-    color: #ffd700; /* Bright Gold on hover */
-    transform: translateY(-2px);
-  }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* Hero Section */
-  .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 20px;
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
-      url('https://images.unsplash.com/photo-1613659275734-19e1a1a0f7b4?ixlib=rb-4.0.1&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-    text-align: center;
-  }
-  .hero h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 3.8em;
-    color: #b8860b; /* Dark Gold */
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px #fff;
-  }
-  .hero p {
-    font-size: 1.5em;
-    max-width: 700px;
-    margin-bottom: 30px;
-    color: #555;
-  }
-  .btn-primary {
-    background-color: #b8860b; /* Gold */
-    color: #fff;
-    padding: 15px 40px;
-    border-radius: 50px;
-    font-size: 1.2em;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  .btn-primary:hover {
-    background-color: #a67c00; /* Darker gold */
-    transform: translateY(-2px);
-  }
-
-  /* Section styles */
-  section {
-    padding: 80px 20px;
-  }
-
-  /* About Section */
-  .about {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-  .about-img {
-    flex: 1 1 45%;
-  }
-  .about-img img {
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
-  }
-  .about-img img:hover {
-    transform: scale(1.05);
-  }
-  .about-text {
-    flex: 1 1 50%;
-  }
-  .about-text h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.6em;
-    margin-bottom: 20px;
-    color: #b8860b; /* Gold */
-  }
-  .about-text p {
-    font-size: 1.2em;
-    line-height: 1.6;
-    color: #555;
-  }
-
-  /* Gallery / Collection */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-  }
-  .card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-  }
-  .card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  .card-details {
-    padding: 20px;
-    text-align: center;
-  }
-  .card-details h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #b8860b; /* Gold */
-  }
-  .card-details p {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #555;
-  }
-
-  /* Testimonials */
-  .testimonials {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-  }
-  .testimonial {
-    background: #fafafa;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .testimonial:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-  }
-  .testimonial p {
-    font-style: italic;
-    font-size: 1em;
-    margin-bottom: 15px;
-    color: #555;
-  }
-  .testimonial cite {
-    display: block;
-    font-weight: 600;
-    font-size: 0.95em;
-    text-align: right;
-    color: #777;
-  }
-
-  /* Footer styles */
-  footer {
-    background-color: #fff;
-    padding: 50px 20px;
-    text-align: center;
-  }
-  footer .logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.4em;
-    color: #b8860b; /* Gold */
-    margin-bottom: 15px;
-  }
-  footer p {
-    font-size: 1em;
-    margin: 10px 0;
-    color: #555;
-  }
-  .social-icons {
-    margin-top: 20px;
-  }
-  .social-icons a {
-    margin: 0 15px;
-    font-size: 1.5em;
-    color: #777;
-    transition: color 0.3s, transform 0.3s;
-  }
-  .social-icons a:hover {
-    color: #b8860b; /* Gold on hover */
-    transform: scale(1.2);
-  }
-
-  /* Responsive Styles */
-  @media(max-width: 768px) {
     body {
-      padding: 10px;
+      font-family: 'Jost', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-dark);
+      line-height: 1.7;
     }
 
+    /* ===== HEADER / NAV ===== */
     header {
-      flex-direction: column;
+      background-color: var(--bg-header);
+      padding: 18px 5%;
+      display: flex;
       align-items: center;
-      padding: 20px 10px;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(139,101,8,0.07);
     }
 
-    .logo {
-      font-size: 2em;
-      margin-bottom: 10px;
+    .logo img {
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .logo-placeholder {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 3px;
     }
 
     nav {
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
+      display: flex;
+      gap: 32px;
+      list-style: none;
     }
 
     nav a {
-      font-size: 0.9em;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
     }
 
-    .hero {
-      padding: 40px 10px;
-    }
+    nav a:hover { color: var(--gold); }
 
-    .hero h1 {
-      font-size: 2em;
-    }
-
-    .hero p {
-      font-size: 1em;
-    }
-
-    section {
-      padding: 40px 10px;
-    }
-
-    .about {
+    /* Hamburger (mobile) */
+    .hamburger {
+      display: none;
       flex-direction: column;
-      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: 0.3s;
     }
 
-    .about-img, .about-text {
-      flex: 1 1 100%;
+    /* ===== PRODUCTS SECTION ===== */
+    #sets {
+      padding: 36px 5% 70px;
       text-align: center;
     }
 
-    .about-img img {
-      max-width: 90%;
-      height: auto;
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 48px;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
     }
 
-    /* Gallery grid on mobile */
-    .gallery {
-      grid-template-columns: 1fr;
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+      margin: 10px auto 0;
     }
 
-    /* Testimonials grid on mobile */
-    .testimonials {
-      grid-template-columns: 1fr;
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 960px;
+      margin: 0 auto;
     }
 
-    /* Footer adjustments */
+    /* ===== HERO ===== */
+    .hero {
+      padding: 90px 5%;
+      text-align: center;
+      background: linear-gradient(160deg, #fff0f0 0%, #fff8e8 100%);
+      border-bottom: 1px solid #f5dada;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      max-width: 540px;
+      margin: 0 auto 32px;
+      line-height: 1.8;
+    }
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--gold);
+      color: #fff;
+      padding: 14px 38px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      box-shadow: 0 6px 20px rgba(139,101,8,0.25);
+      transition: background-color 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background-color: #6e5006; transform: translateY(-2px); }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      padding: 70px 5%;
+      background: var(--white);
+      text-align: center;
+    }
+    #contact .contact-inner { max-width: 620px; margin: 0 auto; }
+    #contact h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    #contact p { font-size: 0.95rem; color: var(--text-dark); margin-bottom: 10px; line-height: 1.8; }
+    #contact a { color: var(--gold); text-decoration: none; }
+    #contact a:hover { text-decoration: underline; }
+    .social-icons { margin-top: 24px; display: flex; justify-content: center; gap: 20px; }
+    .social-icons a { font-size: 1.6rem; transition: transform 0.2s; display: inline-block; }
+    .social-icons a:hover { transform: scale(1.2); }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(139,101,8,0.13);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: #f5dada;
+    }
+
+    /* Placeholder image */
+    .card-img-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #ffe0e0 0%, #ffd6b0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .card-body {
+      padding: 20px 22px 24px;
+      text-align: left;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .card-price {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2a2a2a;
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    #about {
+      padding: 70px 5%;
+      background: var(--white);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .about-img {
+      width: 100%;
+      border-radius: var(--radius);
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #ffe8c2 0%, #ffd6e0 100%);
+    }
+
+    .about-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #ffe8c2 0%, #ffd6e0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .about-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      text-align: left;
+      line-height: 1.8;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials {
+      padding: 70px 5%;
+      text-align: center;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px 24px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+    }
+
+    .testimonial-card:hover { transform: translateY(-4px); }
+
+    .testimonial-text {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 18px;
+    }
+
+    .testimonial-text::before { content: '❝ '; color: var(--gold-light); }
+    .testimonial-text::after  { content: ' ❞'; color: var(--gold-light); }
+
+    .testimonial-author {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold);
+      text-align: right;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== FOOTER ===== */
     footer {
-      padding: 30px 10px;
+      background: var(--bg-header);
+      text-align: center;
+      padding: 22px;
+      font-size: 0.82rem;
+      color: #999;
+      letter-spacing: 0.3px;
     }
 
-    .social-icons a {
-      font-size: 1.2em;
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { display: none; flex-direction: column; }
+      nav.open { display: flex; }
+      .hamburger { display: flex; }
+
+      .cards-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .section-title { font-size: 1.9rem; }
     }
-  }
-</style>
+
+    @media (max-width: 480px) {
+      header { padding: 14px 4%; }
+      #sets, #about, #testimonials { padding: 50px 4%; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Header with Logo Image -->
-<header class="container">
-  <div class="logo">
-    <!-- <img src="path/to/your/logo.png" alt="NATART" style="height:50px;"/> -->
-    <h5/>NATART<h5>
-  </div>
-  <nav>
-    <a href="#home" class="active">მთავარი</a>
-    <a href="#about">ჩვენს შესახებ</a>
-    <a href="#gallery">ნივთები</a>
-    <a href="#testimonials">შეფასება</a>
-    <a href="#contact">საკონტაქტო ინფორმაცია</a>
-  </nav>
-</header>
-
-<!-- Hero -->
-<section id="home" class="hero">
-  <div class="container">
-    <h1>მოძებნეთ ART'ი</h1>
-    <p>შეცვალეთ თქვენი სივრცე ხელნაკეთი თაბაშირის შედევრებით. თანამედროვე, ელეგანტური, მარადიული.</p>
-    <button class="btn-primary" onclick="window.location='#gallery'">ნივთები</button>
-  </div>
-</section>
-
-<!-- About -->
-<section id="about">
-  <div class="container about">
-    <div class="about-img">
-      <img src="agwera.png" alt="Artisans working" />
+  <!-- ===== HEADER ===== -->
+  <header>
+    <!-- მარცხნივ: ლოგო -->
+    <div class="logo">
+      <!-- <img src="path/to/logo.png" alt="NATART Logo" /> -->
+      <span class="logo-placeholder">NATART</span>
     </div>
-    <div class="about-text">
-      <h2>NATART'ის შესახებ</h2>
-      <p>ჩვენ ვქმნით ინოვაციურ თაბაშირის ხელოვნებას თანამედროვე შეხებით. ჩვენ ვაერთიანებთ ტრადიციას და თანამედროვე დიზაინს, რათა შევქმნათ უნიკალური ნამუშევრები, რომლებიც ამაღლებს თქვენს ინტერიერის ესთეტიკას. განიცადეთ ოსტატობა, როგორც არასდროს.</p>
-    </div>
-  </div>
-</section>
 
-<!-- Gallery / Collection -->
-<section id="gallery" style="background-color:#fff; padding:80px 20px;">
-  <div class="container">
-    <h2 class="section-title" style="text-align:center; color:#b8860b;">ჩვენი სეტები</h2>
-    <div class="gallery">
-      <div class="card">
-        <img src="angelozebi.png" alt="Bust Sculpture" />
-        <div class="card-details">
-          <h3>ანგელოზების სეტი</h3>
-          <p>40₾</p>
+    <!-- მარჯვნივ: ნავიგაცია -->
+    <nav id="main-nav">
+      <a href="#sets">ნივთები</a>
+      <a href="#testimonials">შეფასება</a>
+      <a href="#contact">საკონტაქტო ინფორმაცია</a>
+      <a href="#about">ჩვენს შესახებ</a>
+    </nav>
+
+    <!-- მობილური ჰამბურგერი -->
+    <button class="hamburger" id="hamburger" aria-label="მენიუ">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+
+    <!-- ===== პროდუქტების გალერეა ===== -->
+    <section id="sets">
+      <h2 class="section-title">ჩვენი სეტები</h2>
+
+      <div class="cards-grid">
+
+        <!-- ბარათი 1 -->
+        <article class="card">
+          <img class="card-img" src="angelozebi.png" alt="ანგელოზების სეტი" />
+          <div class="card-body">
+            <div class="card-title">ანგელოზების სეტი</div>
+            <div class="card-price">40₾</div>
+          </div>
+        </article>
+
+        <!-- ბარათი 2 -->
+        <article class="card">
+          <img class="card-img" src="shemodgoma.png" alt="შემოდგომის სეტი" />
+          <div class="card-body">
+            <div class="card-title">შემოდგომის სეტი</div>
+            <div class="card-price">40₾</div>
+          </div>
+        </article>
+
+        <!-- ბარათი 3 -->
+        <article class="card">
+          <img class="card-img" src="sashobao.png" alt="საშობაო სოფლის სეტი" />
+          <div class="card-body">
+            <div class="card-title">საშობაო სოფლის სეტი</div>
+            <div class="card-price">70₾</div>
+          </div>
+        </article>
+
+        <!-- ბარათი 4 -->
+        <article class="card">
+          <img class="card-img" src="path/to/set4.jpg" alt="სეტი 4" />
+          <div class="card-body">
+            <div class="card-title">სეტი 4</div>
+            <div class="card-price">00₾</div>
+          </div>
+        </article>
+
+        <!-- ბარათი 5 -->
+        <article class="card">
+          <img class="card-img" src="path/to/set5.jpg" alt="სეტი 5" />
+          <div class="card-body">
+            <div class="card-title">სეტი 5</div>
+            <div class="card-price">00₾</div>
+          </div>
+        </article>
+
+        <!-- ბარათი 6 -->
+        <article class="card">
+          <img class="card-img" src="path/to/set6.jpg" alt="სეტი 6" />
+          <div class="card-body">
+            <div class="card-title">სეტი 6</div>
+            <div class="card-price">00₾</div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== NATART-ის შესახებ ===== -->
+    <section id="about">
+      <div class="about-inner">
+
+        <!-- მარცხენა სვეტი: სურათი -->
+        <img class="about-img" src="agwera.png" alt="Artisans working" />
+
+        <!-- მარჯვენა სვეტი: ტექსტი -->
+        <div class="about-text">
+          <h2>NATART-ის შესახებ</h2>
+          <p>
+            ჩვენ ვქმნით ინოვაციურ თაბაშირის ხელოვნებას, სადაც ყოველი ნამუშევარი არის
+            სიყვარულითა და შემოქმედებით შექმნილი. ჩვენი სეტები შედგება ხელნაკეთი
+            ფიგურებისგან, რომლებიც სახლს სითბოს და სილამაზეს მატებენ. NATART გთავაზობთ
+            უნიკალურ საჩუქრების იდეებს ყველა სეზონისთვის — შემოდგომიდან საახალწლო
+            ზეიმებამდე. ჩვენი ოსტატები ყოველ ნაწარმს ქმნიან ხელით, სრულყოფილებისა
+            და დეტალებზე ყურადღებით.
+          </p>
         </div>
-      </div>
-      <div class="card">
-        <img src="shemodgoma.png" alt="Relief Panel" />
-        <div class="card-details">
-          <h3>შემოდგომის სეტი</h3>
-          <p>40₾</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="sashobao.png" alt="Wall Plaque" />
-        <div class="card-details">
-          <h3>საშობაო სოფელის სეტი</h3>
-          <p>70₾</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Testimonials -->
-<section id="testimonials" style="padding:80px 20px;">
-  <div class="container">
-    <h2 class="section-title" style="text-align:center; color:#b8860b;">ჩვენი მომხმარებლების შეფასება</h2>
-    <div class="testimonials">
-      <div class="testimonial">
-        <p>"აბსოლუტურად განსაცვიფრებელი! NATART-ის ნამუშევრები თანამედროვე და მაღალი ხარისხისაა"</p>
-        <cite>- ა.გ</cite>
       </div>
-      <div class="testimonial">
-        <p>"უნიკალური ხელოვნება, რომელიც გარდაქმნის ჩემს სახლს. გიწევთ რეკომენდაციას."</p>
-        <cite>- ს.გ.</cite>
-      </div>
-      <div class="testimonial">
-        <p>"განსაკუთრებული ოსტატობა და თანამედროვე დიზაინი. მიყვარს!"</p>
-        <cite>- ლ.ლ</cite>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Contact -->
-<section id="contact" style="background-color:#fff; padding:80px 20px; text-align:center;">
-  <h2 class="section-title" style="color:#b8860b;">შეკვეთებისათვის დაგვიკავშირდით,ასევე ვამზადებთ არასტანდარტულ შეკვეთებსაც</h2>
-  <p style="margin-bottom:20px;">Email: Natart@gmail.com | Phone: +995577604756</p>
-  <div class="social-icons">
-    <a href="#">🌐</a>
-    <a href="#">📷</a>
-    <a href="#">🐦</a>
-  </div>
-</section>
+    <!-- ===== მომხმარებლების შეფასებები ===== -->
+    <section id="testimonials">
+      <h2 class="section-title">ჩვენი მომხმარებლების შეფასება</h2>
 
-<!-- Footer -->
-<footer>
-  <div class="container">
-    <div class="logo">NATART</div>
-    <p>&copy; 2026 NATART. All rights reserved.</p>
-  </div>
-</footer>
+      <div class="testimonials-grid">
+
+        <!-- შეფასება 1 -->
+        <article class="testimonial-card">
+          <p class="testimonial-text">
+            ძალიან მომეწონა ანგელოზების სეტი! ხარისხი შესანიშნავია და მიწოდება სწრაფი
+            იყო. აუცილებლად ვიყიდი კიდევ.
+          </p>
+          <div class="testimonial-author">— ნ.კ.</div>
+        </article>
+
+        <!-- შეფასება 2 -->
+        <article class="testimonial-card">
+          <p class="testimonial-text">
+            საშობაო სოფლის სეტი სახლს ზღაპრულ სახეს აძლევს. ყველა სტუმარს ძალიან
+            მოსწონს. გმადლობთ ასეთი ლამაზი ნამუშევრებისთვის!
+          </p>
+          <div class="testimonial-author">— მ.ბ.</div>
+        </article>
+
+        <!-- შეფასება 3 -->
+        <article class="testimonial-card">
+          <p class="testimonial-text">
+            შემოდგომის სეტი ჩუქებად ვიყიდე და საჩუქრის მიმღები ძალიან გახარდა.
+            ხელნაკეთი ნამუშევარი ნამდვილად გამოირჩევა — NATART საუკეთესოა!
+          </p>
+          <div class="testimonial-author">— თ.ა.</div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== საკონტაქტო ინფორმაცია ===== -->
+    <section id="contact">
+      <div class="contact-inner">
+        <h2>საკონტაქტო ინფორმაცია</h2>
+        <p>📞 <a href="tel:+995500000000">+995 557604 756</a></p>
+        <p>📧 <a href="mailto:info@natart.ge">Natart@gmail.com</a></p>
+        <p>📍 თბილისი, საქართველო</p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2024 NATART. ყველა უფლება დაცულია.</p>
+  </footer>
+
+  <!-- ===== JS ===== -->
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('main-nav');
+    hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+          nav.classList.remove('open');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
