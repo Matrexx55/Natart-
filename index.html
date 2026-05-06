@@ -292,23 +292,118 @@
       object-fit: cover;
       display: block;
       background: #f5dada;
+      transition: transform 0.35s ease;
+      cursor: pointer;
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.08);
     }
     .card-body {
       padding: 20px 22px 24px;
       text-align: left;
-    }
-    .card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 8px;
     }
     .card-price {
       font-size: 1.1rem;
       font-weight: 500;
       color: #2a2a2a;
       margin-bottom: 15px;
+    }
+
+    /* ── Product Modal ── */
+    .product-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .product-modal.show {
+      display: flex;
+    }
+    .product-modal-content {
+      background: var(--white);
+      border-radius: var(--radius);
+      max-width: 500px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .product-modal-img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+    }
+    .product-modal-body {
+      padding: 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .product-modal-desc {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .product-modal-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .product-modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .product-modal-add {
+      flex: 1;
+      background: var(--gold);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .product-modal-add:hover {
+      background: #6e5006;
+    }
+    .product-modal-close {
+      flex: 0 0 50px;
+      background: #f0f0f0;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background 0.2s;
+    }
+    .product-modal-close:hover {
+      background: #e0e0e0;
     }
     .btn-add {
       background: var(--gold);
@@ -736,7 +831,7 @@
       <h2 class="section-title">ჩვენი სეტები</h2>
       <div class="cards-grid">
         <article class="card">
-          <img class="card-img" src="angelozebi.png" alt="ანგელოზების სეტი 1" />
+          <img class="card-img" src="angelozebi.png" alt="ანგელოზების სეტი 1" onclick="openSetModal(1)" />
           <div class="card-body">
             <div class="card-title">ანგელოზების სეტი</div>
             <div class="card-price">39₾</div>
@@ -746,7 +841,7 @@
           </div>
         </article>
         <article class="card">
-          <img class="card-img" src="angelozebiset1.png" alt="ანფელოზების სეტი 2" />
+          <img class="card-img" src="angelozebiset1.png" alt="ანფელოზების სეტი 2" onclick="openSetModal(2)" />
           <div class="card-body">
             <div class="card-title">ანგელოზების სეტი</div>
             <div class="card-price">25₾</div>
@@ -756,7 +851,7 @@
           </div>
         </article>
         <article class="card">
-          <img class="card-img" src="sashobao.png" alt="საშობაო სოფლის სეტი 3" />
+          <img class="card-img" src="sashobao.png" alt="საშობაო სოფლის სეტი 3" onclick="openSetModal(3)" />
           <div class="card-body">
             <div class="card-title">საშობაო სოფლის სეტი</div>
             <div class="card-price">70₾</div>
@@ -766,7 +861,7 @@
           </div>
         </article>
         <article class="card">
-          <img class="card-img" src="angelozebi2.png" alt="ანგელოზების სეტი 4" />
+          <img class="card-img" src="angelozebi2.png" alt="ანგელოზების სეტი 4" onclick="openSetModal(4)" />
           <div class="card-body">
             <div class="card-title">ანგელოზები სეტი </div>
             <div class="card-price">45₾</div>
@@ -776,7 +871,7 @@
           </div>
         </article>
         <article class="card">
-          <img class="card-img" src="angelozebiset2.png" alt="ანგელოზების სეტი 5" />
+          <img class="card-img" src="angelozebiset2.png" alt="ანგელოზების სეტი 5" onclick="openSetModal(5)" />
           <div class="card-body">
             <div class="card-title">სეტი 5</div>
             <div class="card-price">39₾</div>
@@ -786,7 +881,7 @@
           </div>
         </article>
         <article class="card">
-          <img class="card-img" src="angelozebiset4.png" alt="ანგელოზები სეტი 6" />
+          <img class="card-img" src="angelozebiset4.png" alt="ანგელოზები სეტი 6" onclick="openSetModal(6)" />
           <div class="card-body">
             <div class="card-title">სეტი 6</div>
             <div class="card-price">45₾</div>
@@ -852,6 +947,42 @@
       </div>
     </section>
   </main>
+
+  <!-- Product Detail Modal -->
+  <div class="product-modal" id="productModal">
+    <div class="product-modal-content">
+      <img id="modalProductImg" class="product-modal-img" src="" />
+      <div class="product-modal-body">
+        <h2 id="modalProductTitle" class="product-modal-title"></h2>
+        <p id="modalProductDesc" class="product-modal-desc"></p>
+        <div id="modalProductPrice" class="product-modal-price"></div>
+        <div class="product-modal-actions">
+          <button id="modalAddBtn" class="product-modal-add">
+            <i class="fas fa-cart-plus"></i> კალათაში
+          </button>
+          <button class="product-modal-close" onclick="closeProductModal()">✕</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div class="product-modal" id="productModal">
+    <div class="product-modal-content">
+      <img id="modalProductImg" class="product-modal-img" src="" />
+      <div class="product-modal-body">
+        <h2 id="modalProductTitle" class="product-modal-title"></h2>
+        <p id="modalProductDesc" class="product-modal-desc"></p>
+        <div id="modalProductPrice" class="product-modal-price"></div>
+        <div class="product-modal-actions">
+          <button id="modalAddBtn" class="product-modal-add">
+            <i class="fas fa-cart-plus"></i> კალათაში
+          </button>
+          <button class="product-modal-close" onclick="closeProductModal()">✕</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Contact FAB (existing 💬) -->
   <button class="chat-fab" id="chatFab" aria-label="დაგვიკავშირდით">💬</button>
@@ -926,8 +1057,34 @@
   </footer>
 
   <script>
-    /* ── Cart Logic ── */
-    let cart = JSON.parse(localStorage.getItem('natartCart')) || [];
+    function openSetModal(setId) {
+      const set = allSets.find(s => s.id === setId);
+      if (!set) return;
+      const modal = document.getElementById('productModal');
+      document.getElementById('modalProductImg').src = set.img;
+      document.getElementById('modalProductTitle').textContent = set.name;
+      document.getElementById('modalProductDesc').textContent = set.description;
+      document.getElementById('modalProductPrice').textContent = set.price + '₾';
+      document.getElementById('modalAddBtn').onclick = () => {
+        addToCart({id: set.id, name: set.name, price: set.price, emoji: set.emoji});
+        closeProductModal();
+      };
+      modal.classList.add('show');
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('show');
+    }
+
+    // ── SETS DATA ──
+    const allSets = [
+      { id: 1, name: "ანგელოზების სეტი", price: 39, img: "angelozebi.png", emoji: '👼', description: "ხელნაკეთი თაბაშირის სუნდელი სეტი რელიგიური მოტივებით. სახლს სითბოს და მკრთალ ელეგანტურობას მატებს." },
+      { id: 2, name: "ანგელოზების სეტი", price: 25, img: "angelozebiset1.png", emoji: '🍂', description: "მოთხოვნილი ანგელოზის სეტი დეკორატიული ელემენტებით. შემოდგომის თემით ხელმხელი კოლექცია." },
+      { id: 3, name: "საშობაო სოფლის სეტი", price: 70, img: "sashobao.png", emoji: '🎄', description: "მშვენიერი საშობაო სოფელი თაბაშირის ფიგურებით. ყოველწლიური დღესასწაულის სახემდელი კოლექცია." },
+      { id: 4, name: "ანგელოზები სეტი", price: 45, img: "angelozebi2.png", emoji: '👼', description: "მკრთალი დეტალებით წამოკეთებული დიდი ანგელოზის ფიგურა. რელიგიური ხელოვნების უნიკალური ნიმუში." },
+      { id: 5, name: "სეტი 5", price: 39, img: "angelozebiset2.png", emoji: '🐚', description: "მოითხოვილი კოლექცია წირი სახელი თაბაშირის ხელოვნებიდან. საოჯახო დეკორაციის სახელმწიფო არჩევანი." },
+      { id: 6, name: "სეტი 6", price: 45, img: "angelozebiset4.png", emoji: '🎃', description: "ბოლო სეზონის ღირებული სეტი დიდი ელეგანტურობით. თაბაშირის მოთხოვნილი დაამტკიცებელი ნაცვლი." }
+    ];
 
     function addToCart(product) {
       const existing = cart.find(item => item.id === product.id);
@@ -1029,6 +1186,14 @@
         const target = document.querySelector(link.getAttribute('href'));
         if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); nav.classList.remove('open'); }
       });
+    });
+
+    document.getElementById('productModal').addEventListener('click', e => {
+      if (e.target.id === 'productModal') closeProductModal();
+    });
+
+    document.getElementById('productModal').addEventListener('click', e => {
+      if (e.target.id === 'productModal') closeProductModal();
     });
 
     updateCartCount();
